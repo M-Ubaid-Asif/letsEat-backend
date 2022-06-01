@@ -1,10 +1,12 @@
 import express from "express"
 import morgan from "morgan"
 import expressLayouts from "express-ejs-layouts"
+
 import session from "express-session"
 import flash from "connect-flash"
 import router from "./components/index.js"
 import cookieParser from "cookie-parser"
+
 
 const app = express()
 
@@ -53,4 +55,5 @@ app.use("/", router)
 app.use((req, res) => {
 	res.render("errors/404")
 })
+
 export default app

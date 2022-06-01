@@ -13,7 +13,7 @@ config()
 function normalizePort(val) {
 	const port = parseInt(val, 10)
 
-	console.log("---->port : ", port)
+	// console.log("---->port : ", port)
 	if (isNaN(port)) {
 		return val
 	}
