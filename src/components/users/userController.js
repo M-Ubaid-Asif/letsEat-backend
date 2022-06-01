@@ -1,4 +1,7 @@
-import { validateRegisterInput } from "../../helpers/validation.js"
+import {
+	validateLoginInput,
+	validateRegisterInput,
+} from "../../helpers/validation.js"
 import { signJwt } from "../../utils/jwt.js"
 import { createUser, findUserBy } from "./userService.js"
 
@@ -105,9 +108,14 @@ const register = async (req, res) => {
 const login = async (req, res) => {
 	try {
 		const { email, password } = req.body
+		let { valid, errors } = validateLoginInput(email, password)
 
-		const errors = {}
+		if (!valid) {
+			return res.render("user/login", { errors, email, password })
+		}
+
 		const user = await findUserBy({ email }, "name password email")
+		errors = {}
 		if (!user) {
 			errors.msg = "Invalid Credentials"
 			return res.render("user/login", { errors, email, password })
