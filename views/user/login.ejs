@@ -5,6 +5,12 @@
     <div class="mb-3">
         <label for="email" class="form-label">Email Address</label>
         <input type="email" class="form-control" id="email" placeholder="john@example.com" name="email" value="<%= typeof email !== 'undefined'? email:''%>">
+        <% if(typeof errors !== 'undefined') {%>
+                        <% if(errors.email) {%>
+                            <p class="inputerror"><%= errors.email %></p>
+                        <%}%>
+
+                    <%}%>
     </div>
     
         <div class="mb-3">
@@ -16,10 +22,18 @@
                         name="password" id="password" class="form-control" value="<%= typeof password !== 'undefined'? password:''%>"/>
                     <i class="bi bi-eye-slash ms-auto mx-0 px-2 py-1"
                         id="togglePassword"></i>
+                    
                 </div>
+                <% if(typeof errors !== 'undefined') {%>
+                        <% if(errors.password) {%>
+                            <p class="inputerror"><%= errors.password %></p>
+                        <%}%>
+
+                    <%}%>
             </div>
 
     <div class="d-flex">
+        <p style="color: blue;">Don't have an Account ? <a href="/register" class="fw-bolder">Register</a></p>
         <button type="submit" class="btn btn-primary ms-auto">Login</button>
     </div>
 </form>
