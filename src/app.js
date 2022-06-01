@@ -1,6 +1,7 @@
 import express from "express"
 import morgan from "morgan"
 import expressLayouts from "express-ejs-layouts"
+import router from "./components/index.js"
 
 const app = express()
 
@@ -19,9 +20,7 @@ app.use("/js", express.static("public"))
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/main.ejs")
-// home routes
 
-app.get("/", async (req, res) => {
-	res.render("home")
-})
+// route
+app.use("/", router)
 export default app
