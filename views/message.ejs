@@ -1,0 +1,36 @@
+<% if(typeof errors !== 'undefined') {%>
+    <% if(typeof errors.emailExist !== 'undefined') {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <%= errors.emailExist%>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<%}%>
+<%}%>
+
+<% if(typeof unAuthError !== 'undefined') {%>
+    <% if(typeof unAuthError.msg !== 'undefined') {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <%= unAuthError.msg%>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<%}%>
+<%}%>
+
+
+<% if(success_msg != '') {%>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <%= success_msg%>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+
+
+<% if(typeof errors !== 'undefined') {%>
+    <% if(typeof errors.msg !== 'undefined') {%>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <%= errors.msg%>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<%}%>
+<%}%>

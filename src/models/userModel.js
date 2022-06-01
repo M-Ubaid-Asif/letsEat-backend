@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
-import db from "../connections/dbMaster"
+import bcrypt from "bcrypt"
+import db from "../connections/dbMaster.js"
 
 const { Schema } = mongoose
 
@@ -39,7 +40,7 @@ const userSchema = new Schema(
 			required: true,
 		},
 		zip: {
-			type: String,
+			type: Number,
 			required: true,
 		},
 	},
@@ -47,5 +48,19 @@ const userSchema = new Schema(
 		timestamps: true,
 	}
 )
+
+userSchema.pre("save", async function (next) {
+	if (this.isModified("password")) {
+		const hashpass = await bcrypt.hash(this.password, 10)
+		this.password = hashpass
+		next()
+	}
+	next()
+})
+
+// compare password
+userSchema.methods.comparePassword = async function (password) {
+	return await bcrypt.compare(password, this.password)
+}
 
 export default db.model("User", userSchema)

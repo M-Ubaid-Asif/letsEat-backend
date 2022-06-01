@@ -61,6 +61,22 @@ const server = createServer(app)
 function onListening() {
 	const addr = server.address()
 	const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`
+	logger.info(`Listening on ${bind}`)
+
+	process.on("unhandledRejection", (err) => {
+		logger.error("UNHANDLED REJECTION! 💥 Shutting down...")
+		logger.error(err.name, err)
+		server.close(() => {
+			process.exit(1)
+		})
+	})
+
+	process.on("SIGTERM", () => {
+		logger.info("👋 SIGTERM RECEIVED. Shutting down gracefully")
+		server.close(() => {
+			logger.info("💥 Process terminated!")
+		})
+	})
 }
 
 /**
